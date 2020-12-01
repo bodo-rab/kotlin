@@ -142,7 +142,7 @@ enum class LanguageFeature(
     ForbidReferencingToUnderscoreNamedParameterOfCatchBlock(KOTLIN_1_5, kind = BUG_FIX),
     UseCorrectExecutionOrderForVarargArguments(KOTLIN_1_5, kind = BUG_FIX),
 
-    FreedomForSealedClasses(KOTLIN_1_5),
+    AllowSealedInheritorsInDifferentFilesOfSamePackage(KOTLIN_1_5),
     SealedInterfaces(KOTLIN_1_5),
 
     // Temporarily disabled, see KT-27084/KT-22379
