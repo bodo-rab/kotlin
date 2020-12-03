@@ -55,6 +55,8 @@ class PropertyLazyInitLowering(
         val file = container.parent as? IrFile
             ?: return
 
+        container.assertCompatibleDeclaration()
+
         val initFun = (when {
             file in fileToInitializationFuns -> fileToInitializationFuns[file]
             fileToInitializerPureness[file] == true -> null
@@ -242,7 +244,10 @@ class RemoveInitializersForLazyProperties(
         declaration.correspondingProperty
             ?.takeIf { it.isForLazyInit() }
             ?.backingField
-            ?.let { it.initializer = null }
+            ?.let {
+                it.assertCompatibleDeclaration()
+                it.initializer = null
+            }
 
         return null
     }
@@ -298,9 +303,14 @@ private fun IrDeclaration.propertyWithPersistentSafe(transform: IrDeclaration.()
 private fun IrDeclaration.isCompatibleDeclaration() =
     origin in compatibleOrigins
 
+private fun IrDeclaration.assertCompatibleDeclaration() {
+    assert((this as? PersistentIrElementBase<*>)?.createdOn?.let { it == 0 } != false)
+}
+
 private val compatibleOrigins = listOf(
     IrDeclarationOrigin.DEFINED,
     IrDeclarationOrigin.DELEGATED_PROPERTY_ACCESSOR,
+    IrDeclarationOrigin.PROPERTY_DELEGATE,
     IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR,
     IrDeclarationOrigin.PROPERTY_BACKING_FIELD,
 )
