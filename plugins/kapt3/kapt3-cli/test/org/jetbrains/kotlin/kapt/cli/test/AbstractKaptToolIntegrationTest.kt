@@ -106,7 +106,8 @@ abstract class AbstractKaptToolIntegrationTest : TestCaseWithTmpdir() {
         val transformed = args.map { it.replace("%KOTLIN_STDLIB%", File("dist/kotlinc/lib/kotlin-stdlib.jar").absolutePath) }
         if (isWindows()) {
             return transformed.map {
-                (if (it.startsWith('\"') || it.startsWith('\'')) it else "\"$it\"").replace(':', ';')
+                //(if (it.startsWith('\"') || it.startsWith('\'')) it else "\"$it\"").replace(':', ';')
+                (if (!it.contains('=')) it else "\"$it\"").replace(':', ';')
             }
         }
         return transformed
