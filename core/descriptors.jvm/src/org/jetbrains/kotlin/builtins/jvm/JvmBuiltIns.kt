@@ -95,7 +95,7 @@ class JvmBuiltIns(storageManager: StorageManager, val kind: Kind) : KotlinBuiltI
             |KIND: $kind
             |owner module: $ownerModuleDescriptor
             |storage manager: $storageManager
-            |created at: ${createdAt.stackTrace}
+            |created at: ${createdAt.stackTrace.joinToString("\n")}\n
         """.trimMargin()
         throw IllegalStateException(message)
     }
