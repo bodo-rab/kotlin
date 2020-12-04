@@ -145,6 +145,8 @@ object KeywordCompletion {
                 next = next.substring(1)
             }
 
+            if (keywordToken == SEALED_KEYWORD && next == ANNOTATION_KEYWORD.value) return
+
             val nextIsNotYetPresent = keywordToken.getNextPossibleKeywords(position)?.none { it.value == next } ?: false
             if (nextIsNotYetPresent)
                 keyword += " " + nextKeyword.value

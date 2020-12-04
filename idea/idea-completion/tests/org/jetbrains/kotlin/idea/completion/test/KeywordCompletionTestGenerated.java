@@ -503,6 +503,11 @@ public class KeywordCompletionTestGenerated extends AbstractKeywordCompletionTes
         runTest("idea/idea-completion/testData/keywords/ReturnSet.kt");
     }
 
+    @TestMetadata("SealedForAnnotationClass.kt")
+    public void testSealedForAnnotationClass() throws Exception {
+        runTest("idea/idea-completion/testData/keywords/SealedForAnnotationClass.kt");
+    }
+
     @TestMetadata("SealedForDeclaredClass.kt")
     public void testSealedForDeclaredClass() throws Exception {
         runTest("idea/idea-completion/testData/keywords/SealedForDeclaredClass.kt");
