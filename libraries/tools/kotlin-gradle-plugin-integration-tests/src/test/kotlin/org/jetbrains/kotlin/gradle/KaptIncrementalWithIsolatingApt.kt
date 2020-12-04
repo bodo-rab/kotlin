@@ -201,6 +201,9 @@ class KaptIncrementalWithIsolatingApt : KaptIncrementalIT() {
     /** Regression test for https://youtrack.jetbrains.com/issue/KT-42182. */
     @Test
     fun testGeneratedSourcesImpactedByClasspathChanges() {
+        //https://youtrack.jetbrains.com/issue/KTI-405
+        if (System.getProperty("os.name")!!.contains("Windows")) return
+
         val project = Project(
             "kaptIncrementalCompilationProject",
             GradleVersionRequired.None
